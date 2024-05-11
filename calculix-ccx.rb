@@ -41,6 +41,7 @@ class CalculixCcx < Formula
     # Patch spooles library
     inreplace "spooles/Make.inc", "/usr/lang-4.0/bin/cc", ENV.cc
     inreplace "spooles/Tree/src/makeGlobalLib", "drawTree.c", "tree.c"
+    inreplace "spooles/ETree/src/transform.c", "IVinit(nfront, NULL)", "IVinit(nfront, 0)"
 
     # Build serial spooles library
     system "make", "-C", "spooles", "lib"
