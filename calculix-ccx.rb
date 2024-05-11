@@ -2,7 +2,7 @@ class CalculixCcx < Formula
   desc "Three-Dimensional Finite Element Solver"
   homepage "http://www.calculix.de/"
   url "http://www.dhondt.de/ccx_2.21.src.tar.bz2"
-  version "2.21"
+  version "2.21.1"
   sha256 "52a20ef7216c6e2de75eae460539915640e3140ec4a2f631a9301e01eda605ad"
 
   livecheck do
