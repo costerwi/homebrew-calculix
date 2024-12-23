@@ -1,9 +1,9 @@
 class CalculixCcx < Formula
   desc "Three-Dimensional Finite Element Solver"
   homepage "http://www.calculix.de/"
-  url "http://www.dhondt.de/ccx_2.21.src.tar.bz2"
-  version "2.21"
-  sha256 "52a20ef7216c6e2de75eae460539915640e3140ec4a2f631a9301e01eda605ad"
+  url "https://www.dhondt.de/ccx_2.22.src.tar.bz2"
+  version "2.22"
+  sha256 "3a94dcc775a31f570229734b341d6b06301ebdc759863df901c8b9bf1854c0bc"
 
   livecheck do
     url :url
@@ -14,15 +14,15 @@ class CalculixCcx < Formula
   depends_on "gcc" if OS.mac? # for gfortran
 
   resource "test" do
-    version "2.21"
+    version "2.22"
     url "http://www.dhondt.de/ccx_#{version}.test.tar.bz2"
-    sha256 "094a0a2ec324fc6f937a96e932b488f48f31ad8d5d1186cd14437e6dc3e599ea"
+    sha256 "804c1ab099f5694b67955ddd72ad4708061019298c5d1d1788bf404d900b86fc"
   end
 
   resource "doc" do
-    version "2.21"
+    version "2.22"
     url "http://www.dhondt.de/ccx_#{version}.htm.tar.bz2"
-    sha256 "1ed21976ba2188d334fe0b5917cf75b8065b9c0b939e6bd35bd98ed57a725ba2"
+    sha256 "de56c566fab9f0031cecd502acd0267d5aad8f76a238a594715306c42ab15afe"
   end
 
   resource "spooles" do
@@ -82,78 +82,16 @@ class CalculixCcx < Formula
 end
 
 __END__
-diff --git a/ccx_2.21/src/CalculiX.h b/ccx_2.21/src/CalculiX.h
-index 8036211..77a312b 100644
---- a/ccx_2.21/src/CalculiX.h
-+++ b/ccx_2.21/src/CalculiX.h
-@@ -1624,6 +1624,18 @@ void FORTRAN(filter,(double *dgdxglob,ITG *nobject,ITG *nk,ITG *nodedesi,
-                      ITG *ny,ITG *nz,ITG *neighbor,double *r,ITG *ndesia,
-                      ITG *ndesib,double *xdesi,double *distmin));
- 
-+void FORTRAN(filter_backward,(double *au, ITG *jq, ITG *irow, ITG *icol, ITG *ndesi,
-+          ITG *nodedesi, double *dgdxglob, ITG *nobject, ITG *nk,
-+          ITG *nobjectstart, char *objectset));
-+
-+void FORTRAN(filter_forward,(double *gradproj1, ITG *nk1, ITG *nodedesi1,
-+          ITG *ndesi1, char *objectset1,
-+          double *xo1, double *yo1, double *zo1, double *x1, double *yy1, double *z1,
-+          ITG *nx1, ITG *ny1, ITG *nz1, ITG *neighbor1,
-+          double *r1, ITG *ndesia, ITG *ndesib, double *xdesi1,
-+          double *distmin1, double *feasdir1,
-+          double *filterval1));
-+
- void filtermain(double *co,double *dgdxglob,ITG *nobject,ITG *nk,
-                 ITG *nodedesi,ITG *ndesi,char *objectset,double *xdesi,
-                 double *distmin);
-@@ -1637,6 +1649,11 @@ void filtermain_forward(double *co,double *gradproj,ITG *nk,
-                 ITG *nodedesi,ITG *ndesi,char *objectset,double *xdesi,
- 		double *distmin,double *feasdir);
- 
-+void FORTRAN(filtermatrix,(double *au,ITG *jq, ITG *irow, ITG *icol, ITG *ndesi,
-+            ITG *nodedesi, double *filterrad, double *co, ITG *nk,
-+            double *denominator, char *objectset, double *filterval,
-+            double *xdesi, double *distmin));
-+
- void *filtermt(ITG *i);
- 
- void *filter_forwardmt(ITG *i);
-@@ -3380,6 +3397,13 @@ void FORTRAN(openfile,(char *jobname));
- 
- void FORTRAN(openfilefluidfem,(char *jobname));
- 
-+void FORTRAN(packaging,(ITG *nodedesiboun1, ITG *ndesiboun1, char *objectset1,
-+            double *xo1, double *yo1, double *zo1, double *x1, double *yy1, double *z1,
-+            ITG *nx1, ITG *ny1, ITG *nz1, double *co1, ITG *ifree1,
-+            ITG *ndesia, ITG *ndesib, ITG *iobject1, ITG *ndesi1,
-+            double *dgdxglob1, ITG *nk1, double *extnor1,
-+            double *g01, ITG *nodenum1));
-+
- void packagingmain(double *co,ITG *nobject,ITG *nk,ITG *nodedesi,ITG *ndesi,
- 		   char *objectset,char *set,ITG *nset,ITG *istartset,
- 		   ITG *iendset,ITG *ialset,ITG *iobject,ITG *nodedesiinv,
-@@ -3508,6 +3532,12 @@ void FORTRAN(prefilter,(double *co,ITG *nodedesi,ITG *ndesi,double *xo,
- void preiter(double *ad,double **aup,double *b,ITG **icolp,ITG **irowp,
-              ITG *neq,ITG *nzs,ITG *isolver,ITG *iperturb);
- 
-+void FORTRAN(prepackaging,(double *co, double *xo, double *yo, double *zo,
-+            double *x, double *y, double *z,
-+            ITG *nx, ITG *ny, ITG *nz, ITG *ifree, ITG *nodedesiinv,
-+            ITG *ndesiboun, ITG *nodedesiboun, char *set, ITG *nset, char *objectset,
-+            ITG *iobject, ITG *istartset, ITG *iendset, ITG *ialset, ITG *nodenum));
-+
- void preparll(ITG *mt,double *dtime,double *veold,double *scal1,
-                    double *accold,double *uam,ITG *nactdof,double *v,
-                    double *vold,double *scal2,ITG *nk,ITG *num_cpus);
-diff --git a/ccx_2.21/src/Makefile b/ccx_2.21/src/Makefile
+diff --git a/ccx_2.22/src/Makefile b/ccx_2.22/src/Makefile
 index d46da7d..3679990 100755
---- a/ccx_2.21/src/Makefile
-+++ b/ccx_2.21/src/Makefile
+--- a/ccx_2.22/src/Makefile
++++ b/ccx_2.22/src/Makefile
 @@ -25,7 +25,7 @@ LIBS = \
  	../../../ARPACK/libarpack_INTEL.a \
         -lpthread -lm -lc
  
--ccx_2.21: $(OCCXMAIN) ccx_2.21.a  $(LIBS)
-+ccx_2.21: $(OCCXMAIN) ccx_2.21.a
- 	./date.pl; $(CC) $(CFLAGS) -c ccx_2.21.c; $(FC)  -Wall -O2 -o $@ $(OCCXMAIN) ccx_2.21.a $(LIBS) -fopenmp
+-ccx_2.22: $(OCCXMAIN) ccx_2.22.a  $(LIBS)
++ccx_2.22: $(OCCXMAIN) ccx_2.22.a
+ 	./date.pl; $(CC) $(CFLAGS) -c ccx_2.22.c; $(FC)  -Wall -O2 -o $@ $(OCCXMAIN) ccx_2.22.a $(LIBS) -fopenmp
  
- ccx_2.21.a: $(OCCXF) $(OCCXC)
+ ccx_2.22.a: $(OCCXF) $(OCCXC)
