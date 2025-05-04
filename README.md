@@ -1,10 +1,16 @@
 # Homebrew Calculix
-These formulæ provide convenient installation of [Calculix FEA software](http://www.calculix.de/) on MacOS.
+These formulæ provide convenient installation of [CalculiX FEA software](http://www.calculix.de/) on MacOS.
 
 ## How do I install these formulæ?
+For the solver (CalculiX CrunchiX):
 `brew install costerwi/homebrew-calculix/calculix-ccx`
 
-Or `brew tap costerwi/homebrew-calculix` and then `brew install calculix-ccx`.
+For the pre- and postprocessor (CalculiX GraphiX):
+`brew install costerwi/homebrew-calculix/calculix-cgx`
+
+Or `brew tap costerwi/homebrew-calculix` and then:
+* `brew install calculix-ccx`
+* `brew install calculix-cgx`
 
 ## Troubleshooting
 **IMPORTANT** First read the [Troubleshooting Checklist](https://docs.brew.sh/Troubleshooting.html).
