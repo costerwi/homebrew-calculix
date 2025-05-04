@@ -1,6 +1,6 @@
 class CalculixCgx < Formula
   desc "Pre- and Postprocessor for CalculiX"
-  homepage "http://www.calculix.de/"
+  homepage "https://www.calculix.de/"
   url "https://www.dhondt.de/cgx_2.22.all.tar.bz2"
   version "2.22"
   sha256 "c642431089560eec21b1a6a5d7f5a40bc23ea946115a296b8dd8cb8a596921d1"
@@ -11,9 +11,12 @@ class CalculixCgx < Formula
 
   depends_on "pkg-config" => :build
   depends_on "gcc"
-  depends_on "mesa-glu"
   depends_on "libxi"
   depends_on "libxmu"
+  depends_on "mesa-glu"
+
+  # Apply patches
+  patch :DATA
 
   def caveats
     <<~EOS
@@ -22,26 +25,23 @@ class CalculixCgx < Formula
     EOS
   end
 
-  # Apply patches
-  patch :DATA
-
   # Build and install cgx
   def install
     # Build from source
     target = Pathname.new("CalculiX/cgx_#{version}/src/cgx")
     system "make", "-C", target.dirname
     bin.install target
-    
+
     # Documentation and examples
     doc.install Dir["CalculiX/cgx_#{version}/doc"]
     pkgshare.install Dir["CalculiX/cgx_#{version}/examples/*"]
   end
 
   # Test cgx
-  def test
+  test do
     cp_r "#{HOMEBREW_PREFIX}/Cellar/#{name}/#{version}/share/#{name}/compressor", testpath
-    system "#{bin}/cgx -bg -b compressor/send.fbl"
-    assert_predicate testpath/"all.msh", :exist?
+    system "#{bin}/cgx", "-bg", "-b", "compressor/send.fbl"
+    assert_path_exists testpath/"all.msh", :exist?
   end
 end
 
