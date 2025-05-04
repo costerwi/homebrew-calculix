@@ -18,13 +18,6 @@ class CalculixCgx < Formula
   # Apply patches
   patch :DATA
 
-  def caveats
-    <<~EOS
-      XQuartz is required to run CalculiX GraphiX in non-background mode. You can install it manually with:
-        brew install --cask xquartz
-    EOS
-  end
-
   # Build and install cgx
   def install
     # Build from source
@@ -35,6 +28,13 @@ class CalculixCgx < Formula
     # Documentation and examples
     doc.install Dir["CalculiX/cgx_#{version}/doc"]
     pkgshare.install Dir["CalculiX/cgx_#{version}/examples/*"]
+  end
+
+  def caveats
+    <<~EOS
+      XQuartz is required to run CalculiX GraphiX in non-background mode. You can install it manually with:
+        brew install --cask xquartz
+    EOS
   end
 
   # Test cgx
