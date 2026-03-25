@@ -1,8 +1,9 @@
 class CalculixCgx < Formula
   desc "Pre- and Postprocessor for CalculiX"
-  homepage "https://www.calculix.de/"
-  url "https://www.dhondt.de/cgx_2.23.all.tar.bz2"
-  version "2.23"
+  homepage "https://www.calculix.de"
+  VERSION = "2.23".freeze
+  url "https://www.dhondt.de/cgx_#{VERSION}.all.tar.bz2"
+  version VERSION
   sha256 "04abbe0d2bac6a7bff018238b409568c189ede25589880e8cdd947f56ebd67c7"
 
   livecheck do
@@ -21,13 +22,13 @@ class CalculixCgx < Formula
   # Build and install cgx
   def install
     # Build from source
-    target = Pathname.new("CalculiX/cgx_#{version}/src/cgx")
+    target = Pathname.new("CalculiX/cgx_#{VERSION}/src/cgx")
     system "make", "-C", target.dirname
     bin.install target
 
     # Documentation and examples
-    doc.install Dir["CalculiX/cgx_#{version}/doc"]
-    pkgshare.install Dir["CalculiX/cgx_#{version}/examples/*"]
+    doc.install Dir["CalculiX/cgx_#{VERSION}/doc"]
+    pkgshare.install Dir["CalculiX/cgx_#{VERSION}/examples/*"]
   end
 
   def caveats
@@ -39,7 +40,7 @@ class CalculixCgx < Formula
 
   # Test cgx
   test do
-    cp_r "#{HOMEBREW_PREFIX}/Cellar/#{name}/#{version}/share/#{name}/compressor", testpath
+    cp_r "#{HOMEBREW_PREFIX}/Cellar/#{name}/#{VERSION}/share/#{name}/compressor", testpath
     system "#{bin}/cgx", "-bg", "-b", "compressor/send.fbl"
     assert_path_exists testpath/"all.msh", :exist?
   end

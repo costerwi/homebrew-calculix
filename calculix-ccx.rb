@@ -1,8 +1,9 @@
 class CalculixCcx < Formula
   desc "Three-Dimensional Finite Element Solver"
   homepage "https://www.calculix.de"
-  url "https://www.dhondt.de/ccx_2.23.src.tar.bz2"
-  version "2.23"
+  VERSION = "2.23".freeze
+  url "https://www.dhondt.de/ccx_#{VERSION}.src.tar.bz2"
+  version VERSION
   sha256 "9c88385c10fb04f5dc6c4e98027a51bebdd8aee3920e05190d6c1dd08357d6e7"
 
   livecheck do
@@ -14,12 +15,12 @@ class CalculixCcx < Formula
   depends_on "gcc" if OS.mac? # for gfortran
 
   resource "test" do
-    url "https://www.dhondt.de/ccx_#{version}.test.tar.bz2"
+    url "https://www.dhondt.de/ccx_#{VERSION}.test.tar.bz2"
     sha256 "be2259fd9a7b990d0453b30708e1b05f2cd4b6df4a90fa96f0e4abd1ae7beaa0"
   end
 
   resource "doc" do
-    url "https://www.dhondt.de/ccx_#{version}.htm.tar.bz2"
+    url "https://www.dhondt.de/ccx_#{VERSION}.htm.tar.bz2"
     sha256 "ed14b31b51972d5492209a42fcd52a062e36cbc7843bcd358617cb3aee0da736"
   end
 
@@ -62,20 +63,20 @@ class CalculixCcx < Formula
             "CFLAGS=#{cflags.join(" ")}",
             "FFLAGS=#{fflags.join(" ")}",
             "LIBS=#{libs.join(" ")}"]
-    target = Pathname.new("ccx_#{version}/src/ccx_#{version}")
+    target = Pathname.new("ccx_#{VERSION}/src/ccx_#{VERSION}")
     system "make", "-C", target.dirname, target.basename, *args
     bin.install target
 
     (buildpath/"test").install resource("test")
-    pkgshare.install Dir["test/ccx_#{version}/test/*"]
+    pkgshare.install Dir["test/ccx_#{VERSION}/test/*"]
 
     (buildpath/"doc").install resource("doc")
-    doc.install Dir["doc/ccx_#{version}/doc/ccx/*"]
+    doc.install Dir["doc/ccx_#{VERSION}/doc/ccx/*"]
   end
 
   test do
     cp "#{pkgshare}/spring1.inp", testpath
-    system "#{bin}/ccx_#{version}", "spring1"
+    system "#{bin}/ccx_#{VERSION}", "spring1"
   end
 end
 
