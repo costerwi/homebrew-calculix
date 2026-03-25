@@ -49,7 +49,7 @@ class CalculixCcx < Formula
     system "make", "-C", "spooles/MT/src", "makeLib"
 
     # Buid Calculix ccx
-    fflags= %w[-O2 -fopenmp]
+    fflags= %w[-O2 -fopenmp -cpp]
     cflags = %w[-O2 -I../../spooles -DARCH=Linux -DSPOOLES -DARPACK -DMATRIXSTORAGE -DUSE_MT=1]
     libs = ["../../spooles/spooles.a"].concat(`pkg-config --libs arpack`.split)
 
@@ -82,15 +82,27 @@ end
 
 __END__
 diff --git a/ccx_2.23/src/Makefile b/ccx_2.23/src/Makefile
-index d46da7d..3679990 100755
 --- a/ccx_2.23/src/Makefile
 +++ b/ccx_2.23/src/Makefile
 @@ -25,7 +25,7 @@ LIBS = \
  	../../../ARPACK/libarpack_INTEL.a \
         -lpthread -lm -lc
  
--ccx_2.22: $(OCCXMAIN) ccx_2.22.a  $(LIBS)
+-ccx_2.23: $(OCCXMAIN) ccx_2.23.a  $(LIBS)
 +ccx_2.23: $(OCCXMAIN) ccx_2.23.a
  	./date.pl; $(CC) $(CFLAGS) -c ccx_2.23.c; $(FC)  -Wall -O2 -o $@ $(OCCXMAIN) ccx_2.23.a $(LIBS) -fopenmp
  
  ccx_2.23.a: $(OCCXF) $(OCCXC)
+
+diff --git a/ccx_2.23/src/readnewmesh.c b/ccx_2.23/src/readnewmesh.c
+--- a/ccx_2.23/src/readnewmesh.c
++++ b/ccx_2.23/src/readnewmesh.c
+@@ -465,7 +465,7 @@
+   *ipkonp=ipkon;*lakonp=lakon;*iamt1p=iamt1;*ipobodyp=ipobody;
+   *iprfnp=iprfn;*konrfnp=konrfn;*ratiorfnp=ratiorfn;
+   
+-  return NULL;
++  return;
+ 
+ }
+ 
