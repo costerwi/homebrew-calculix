@@ -1,9 +1,9 @@
 class CalculixCgx < Formula
   desc "Pre- and Postprocessor for CalculiX"
   homepage "https://www.calculix.de/"
-  url "https://www.dhondt.de/cgx_2.22.all.tar.bz2"
-  version "2.22"
-  sha256 "c642431089560eec21b1a6a5d7f5a40bc23ea946115a296b8dd8cb8a596921d1"
+  url "https://www.dhondt.de/cgx_2.23.all.tar.bz2"
+  version "2.23"
+  sha256 "04abbe0d2bac6a7bff018238b409568c189ede25589880e8cdd947f56ebd67c7"
 
   livecheck do
     url :url
@@ -46,10 +46,10 @@ class CalculixCgx < Formula
 end
 
 __END__
-diff --git a/CalculiX/cgx_2.22/src/Makefile b/CalculiX/cgx_2.22/src/Makefile
+diff --git a/CalculiX/cgx_2.23/src/Makefile b/CalculiX/cgx_2.23/src/Makefile
 index 28b44ef..b00a692 100644
---- a/CalculiX/cgx_2.22/src/Makefile
-+++ b/CalculiX/cgx_2.22/src/Makefile
+--- a/CalculiX/cgx_2.23/src/Makefile
++++ b/CalculiX/cgx_2.23/src/Makefile
 @@ -1,16 +1,14 @@
  # on MacOS it might be necessary to remove -DSEMINIT
 -CFLAGS = -O2 -Wall -Wno-narrowing -DSEMINIT \
