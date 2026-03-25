@@ -1,9 +1,9 @@
 class CalculixCcx < Formula
   desc "Three-Dimensional Finite Element Solver"
-  homepage "http://www.calculix.de/"
-  url "https://www.dhondt.de/ccx_2.22.src.tar.bz2"
-  version "2.22"
-  sha256 "3a94dcc775a31f570229734b341d6b06301ebdc759863df901c8b9bf1854c0bc"
+  homepage "https://www.calculix.de"
+  url "https://www.dhondt.de/ccx_2.23.src.tar.bz2"
+  version "2.23"
+  sha256 "9c88385c10fb04f5dc6c4e98027a51bebdd8aee3920e05190d6c1dd08357d6e7"
 
   livecheck do
     url :url
@@ -14,21 +14,19 @@ class CalculixCcx < Formula
   depends_on "gcc" if OS.mac? # for gfortran
 
   resource "test" do
-    version "2.22"
-    url "http://www.dhondt.de/ccx_#{version}.test.tar.bz2"
-    sha256 "804c1ab099f5694b67955ddd72ad4708061019298c5d1d1788bf404d900b86fc"
+    url "https://www.dhondt.de/ccx_#{version}.test.tar.bz2"
+    sha256 "be2259fd9a7b990d0453b30708e1b05f2cd4b6df4a90fa96f0e4abd1ae7beaa0"
   end
 
   resource "doc" do
-    version "2.22"
-    url "http://www.dhondt.de/ccx_#{version}.htm.tar.bz2"
-    sha256 "de56c566fab9f0031cecd502acd0267d5aad8f76a238a594715306c42ab15afe"
+    url "https://www.dhondt.de/ccx_#{version}.htm.tar.bz2"
+    sha256 "ed14b31b51972d5492209a42fcd52a062e36cbc7843bcd358617cb3aee0da736"
   end
 
   resource "spooles" do
     # The spooles library is not currently maintained and so would not make a
     # good brew candidate. Instead it will be static linked to ccx.
-    url "http://www.netlib.org/linalg/spooles/spooles.2.2.tgz"
+    url "https://www.netlib.org/linalg/spooles/spooles.2.2.tgz"
     sha256 "a84559a0e987a1e423055ef4fdf3035d55b65bbe4bf915efaa1a35bef7f8c5dd"
   end
 
@@ -82,16 +80,16 @@ class CalculixCcx < Formula
 end
 
 __END__
-diff --git a/ccx_2.22/src/Makefile b/ccx_2.22/src/Makefile
+diff --git a/ccx_2.23/src/Makefile b/ccx_2.23/src/Makefile
 index d46da7d..3679990 100755
---- a/ccx_2.22/src/Makefile
-+++ b/ccx_2.22/src/Makefile
+--- a/ccx_2.23/src/Makefile
++++ b/ccx_2.23/src/Makefile
 @@ -25,7 +25,7 @@ LIBS = \
  	../../../ARPACK/libarpack_INTEL.a \
         -lpthread -lm -lc
  
 -ccx_2.22: $(OCCXMAIN) ccx_2.22.a  $(LIBS)
-+ccx_2.22: $(OCCXMAIN) ccx_2.22.a
- 	./date.pl; $(CC) $(CFLAGS) -c ccx_2.22.c; $(FC)  -Wall -O2 -o $@ $(OCCXMAIN) ccx_2.22.a $(LIBS) -fopenmp
++ccx_2.23: $(OCCXMAIN) ccx_2.23.a
+ 	./date.pl; $(CC) $(CFLAGS) -c ccx_2.23.c; $(FC)  -Wall -O2 -o $@ $(OCCXMAIN) ccx_2.23.a $(LIBS) -fopenmp
  
- ccx_2.22.a: $(OCCXF) $(OCCXC)
+ ccx_2.23.a: $(OCCXF) $(OCCXC)
