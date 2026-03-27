@@ -12,6 +12,15 @@ Or `brew tap costerwi/homebrew-calculix` and then:
 * `brew install calculix-ccx`
 * `brew install calculix-cgx`
 
+## Local Calculix documentation
+`open /opt/homebrew/share/doc/calculix-ccx/index.html`
+
+## Local example files
+* /opt/homebrew/share/calculix-ccx/
+* /opt/homebrew/share/calculix-cgx/
+
+<img width="812" height="722" alt="image" src="https://github.com/user-attachments/assets/90f09cc4-b3a8-4069-b986-14523384632e" />
+
 ## Troubleshooting
 **IMPORTANT** First read the [Troubleshooting Checklist](https://docs.brew.sh/Troubleshooting.html).
 
@@ -19,5 +28,5 @@ Use `brew gist-logs calculix-ccx` to create a [Gist](https://gist.github.com/) a
 
 Search [open](https://github.com/costerwi/homebrew-calculix/issues?state=open) and [closed](https://github.com/costerwi/homebrew-calculix/issues?state=closed) issues. See also Homebrew's  [Common Issues](https://docs.brew.sh/Common-Issues.html) and [FAQ](https://docs.brew.sh/FAQ.html).
 
-## Documentation
+## Brew documentation
 `brew help`, `man brew` or check [Homebrew's documentation](https://github.com/Homebrew/brew/blob/master/docs/README.md).
